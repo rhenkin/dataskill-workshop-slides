@@ -1,0 +1,282 @@
+[
+  {
+    "objectID": "ehrworkshop.html#what-is-it",
+    "href": "ehrworkshop.html#what-is-it",
+    "title": "Analysis of EHR Workshop",
+    "section": "What is it?",
+    "text": "What is it?\n\nElectronic health record (EHR) dataset from GP practices that use EMIS Web\n\nRoutinely collected data: not made for research\n\nClinical information originally stored with SNOMED/dm+d codes\n\nCPRD converts to intermediate mappings (medcodeids and prodcodeids)\n\nCodelists and/or calculations/decision trees used to identify diagnosis\n\nNotes (i.e. free text) are not included"
+  },
+  {
+    "objectID": "ehrworkshop.html#codelists",
+    "href": "ehrworkshop.html#codelists",
+    "title": "Analysis of EHR Workshop",
+    "section": "Codelists",
+    "text": "Codelists\n\nCPRD provides a Code Browser to help create codelists\n\nCodelist curation is often a collaborative work\n\nResearchers often share as supplementary material\nOnline repositories are also a good source of codelists:\n\nLSHTM Data Compass: https://datacompass.lshtm.ac.uk/\nHRD UK Phenotype library: https://phenotypes.healthdatagateway.org/phenotypes/"
+  },
+  {
+    "objectID": "ehrworkshop.html#how-it-is-structured",
+    "href": "ehrworkshop.html#how-it-is-structured",
+    "title": "Analysis of EHR Workshop",
+    "section": "How it is structured",
+    "text": "How it is structured\n\n\n\nThe diagram shows how the information recorded in EMIS is actually stored Other health record software such as Vision, record it differently The links tell you how to connect the information from each table with another For example, once a patient record is created in the patient table, we can then use patient ID to connect with consultation, observation and drugissue. We cannot use patient ID to find information about that patient’s practice, but we can use the practice ID for that. Similarly, a staff ID is created in the Staff table. With that ID, we can find all consultations linked to that person."
+  },
+  {
+    "objectID": "ehrworkshop.html#data-format",
+    "href": "ehrworkshop.html#data-format",
+    "title": "Analysis of EHR Workshop",
+    "section": "Data format",
+    "text": "Data format\n\n\n\nDatabase designed for everyday use of EMIS\n\nUseful for the software\n\nNew entries (e.g. consultation) added to the bottom of each table\nEach row corresponds to a uniquely* identifiable entry"
+  },
+  {
+    "objectID": "ehrworkshop.html#for-us",
+    "href": "ehrworkshop.html#for-us",
+    "title": "Analysis of EHR Workshop",
+    "section": "For us",
+    "text": "For us\n\nEach table extracted as a tab-separated file (TSV)\n\nIn practice, not even as a single file\n\nVery large data (e.g. 80GB+), depending on the study\nMany entries on a health record require lookup tables to identify the real value\n\nE.g. lab test results are recorded with a code for the unit rather than ‘mg/dL’"
+  },
+  {
+    "objectID": "ehrworkshop.html#our-goal-today",
+    "href": "ehrworkshop.html#our-goal-today",
+    "title": "Analysis of EHR Workshop",
+    "section": "Our goal today",
+    "text": "Our goal today\n\nOne row per unit of analysis: patient\n\n\n\n\n\n\n\n\n\npatid\nage_index\nethnicity\nbaseline_bmi\nhas_disease1\nhas_outcome\ndeath_date\nfollow_up_days\n\n\n\n\n1\n55\nWhite\n21.23\nTRUE\nFALSE\nNA\n45\n\n\n2\n44\nSouthAsian\nNA\nTRUE\nFALSE\nNA\n60\n\n\n3\n33\nBlack\n26.01\nTRUE\nTRUE\nNA\n61\n\n\n4\n62\nOther\n23.22\nFALSE\nFALSE\n2016\n75\n\n\n5\n75\nNA\n21.34\nFALSE\nTRUE\nNA\n25"
+  },
+  {
+    "objectID": "ehrworkshop.html#projects-in-rstudio",
+    "href": "ehrworkshop.html#projects-in-rstudio",
+    "title": "Analysis of EHR Workshop",
+    "section": "Projects in RStudio",
+    "text": "Projects in RStudio\n\n\n\nWith projects we do not have to worry about the location of files\n\nThey always set the working directory\n\nWhen loading data files, we do not need to know the full location on the computer\nWe can write everything relative to the project folder:\n\ncodelists/file.txt\nresults/output.txt\ntestcode/test.R"
+  },
+  {
+    "objectID": "ehrworkshop.html#looking-for-help-and-more-information",
+    "href": "ehrworkshop.html#looking-for-help-and-more-information",
+    "title": "Analysis of EHR Workshop",
+    "section": "Looking for help and more information",
+    "text": "Looking for help and more information\n\n?filter\npackage website\npackage documentation"
+  },
+  {
+    "objectID": "ehrworkshop.html#using-r-to-process-data",
+    "href": "ehrworkshop.html#using-r-to-process-data",
+    "title": "Analysis of EHR Workshop",
+    "section": "Using R to process data",
+    "text": "Using R to process data\n\n\n\nEnd goal: Apply a study design to data\nSteps:\n\nIdentify records of interest\nSelect patients, records and variables\nOrganise data for analysis purpose"
+  },
+  {
+    "objectID": "ehrworkshop.html#key-data-operations",
+    "href": "ehrworkshop.html#key-data-operations",
+    "title": "Analysis of EHR Workshop",
+    "section": "Key data operations",
+    "text": "Key data operations\n\nFive key commands:\n\nFilter: keep/exclude rows from tables\nSelect: keep/exclude columns from tables\nMutate: create new columns or change the content of existing columns\nGroup By: apply filter/mutate on a subset of rows (e.g. )\nJoin/Merge: combine different tables into one\n\nNot an exhaustive list but covers most of what we need to prepare a dataset for analysis"
+  },
+  {
+    "objectID": "ehrworkshop.html#filter",
+    "href": "ehrworkshop.html#filter",
+    "title": "Analysis of EHR Workshop",
+    "section": "Filter",
+    "text": "Filter\n\nKeeps records or patients that are relevant to the analysis\nUse logical operators to keep/exclude rows in the tables\nExamples: Eligible patients, records in the correct time windows, measurement and test results\n\npatient |&gt;\n    filter(gender == \"M\")"
+  },
+  {
+    "objectID": "ehrworkshop.html#how-to-use-filter",
+    "href": "ehrworkshop.html#how-to-use-filter",
+    "title": "Analysis of EHR Workshop",
+    "section": "How to use filter",
+    "text": "How to use filter\n\nDirect value:\n\npatient |&gt;\n    filter(gender == \"M\")\n\nReferencing another variable:\n\nstudy_start &lt;- as.Date(\"2005-01-01\")\npatient |&gt;\n    filter(regstatdate &gt;= study_start)\n\nReferencing another variable which is a list\n\nsuspect_practices &lt;- c(2, 3, 5, 9)\npatient |&gt;\n    filter(pracid %in% suspect_practices)\n\nCombine conditions with ,/& (AND), | (OR), ! (NOT)"
+  },
+  {
+    "objectID": "ehrworkshop.html#what-we-filter-on",
+    "href": "ehrworkshop.html#what-we-filter-on",
+    "title": "Analysis of EHR Workshop",
+    "section": "What we filter on",
+    "text": "What we filter on\n\nMain filtering operations in CPRD:\n\nregstartdate, regenddate and emis_ddate/cprd_ddate in patient\nmedcodeid, obsdate, value and numunitid in observation\nprodcodeid and issuedate in drugissue\n\nmedcodeid and prodcodeid are filtered with codelists\nnumunitid is filtered with the unit lookup table\nDates can be directly filtered with intervals of interest, or in combination with other tables (e.g. all prescriptions after a diagnosis)"
+  },
+  {
+    "objectID": "ehrworkshop.html#your-turn",
+    "href": "ehrworkshop.html#your-turn",
+    "title": "Analysis of EHR Workshop",
+    "section": "Your turn",
+    "text": "Your turn\n\nOpen the your-turn-filter.R file\nWork through the exercises in order\n\nClick on a line and Ctrl+Enter/Cmd+Return to run that line\nOr select a group of lines and use the same shortcut"
+  },
+  {
+    "objectID": "ehrworkshop.html#select",
+    "href": "ehrworkshop.html#select",
+    "title": "Analysis of EHR Workshop",
+    "section": "Select",
+    "text": "Select\n\nSelect keeps/removes the columns that we need\nThree key reasons we want to select columns:\n\nTables with the same column names might clash\nReduce the amount of memory/file size\nSome operations require an exact set of known columns\n\n\npatient |&gt;\n    select(patid, gender)"
+  },
+  {
+    "objectID": "ehrworkshop.html#how-to-use-select",
+    "href": "ehrworkshop.html#how-to-use-select",
+    "title": "Analysis of EHR Workshop",
+    "section": "How to use select",
+    "text": "How to use select\n\n\nKeep only the columns we want:\n\npatient |&gt;\n    select(patid, gender)\n\nExclude only the columns we DO NOT want:\n\npatient |&gt;\n    select(-regenddate)"
+  },
+  {
+    "objectID": "ehrworkshop.html#how-to-use-select-1",
+    "href": "ehrworkshop.html#how-to-use-select-1",
+    "title": "Analysis of EHR Workshop",
+    "section": "How to use select",
+    "text": "How to use select\n\nRenaming when selecting:\n\npatient |&gt;\n    select(patid, death_date = emis_ddate)\n\nWith helper functions:\n\npatient |&gt; \n    select(contains(\"date\"))"
+  },
+  {
+    "objectID": "ehrworkshop.html#what-we-typically-select",
+    "href": "ehrworkshop.html#what-we-typically-select",
+    "title": "Analysis of EHR Workshop",
+    "section": "What we typically select",
+    "text": "What we typically select\n\npatient: patid , gender, yob, pracid\nobservation: patid, medcodeid, obsdate, value, numunitid\ndrugissue: patid, prodcodeid, issuedate\nAlways consult the CPRD Data specification and/or use colnames(table_name) to see the columns that your CPRD cut has"
+  },
+  {
+    "objectID": "ehrworkshop.html#your-turn-1",
+    "href": "ehrworkshop.html#your-turn-1",
+    "title": "Analysis of EHR Workshop",
+    "section": "Your turn",
+    "text": "Your turn\n\nOpen the your-turn-select.R file\nWork through the exercises in order\nSkip the lines you ran in the previous exercise"
+  },
+  {
+    "objectID": "ehrworkshop.html#mutate",
+    "href": "ehrworkshop.html#mutate",
+    "title": "Analysis of EHR Workshop",
+    "section": "Mutate",
+    "text": "Mutate\n\nMutate creates new columns or overwrite existing ones\nWe can use it for calculations, annotations, editing raw data values\nIt’s what allows us to map raw data to inclusion/exclusion criteria, exposures, outcomes and covariates\n\npatient |&gt;\n    mutate(age_2020 = 2020 - yob)"
+  },
+  {
+    "objectID": "ehrworkshop.html#what-we-typically-mutate",
+    "href": "ehrworkshop.html#what-we-typically-mutate",
+    "title": "Analysis of EHR Workshop",
+    "section": "What we typically mutate",
+    "text": "What we typically mutate\n\nAges and durations: age at index date, registration duration, time since/until event\nFlags: before/after a cutoff date, exposure occurred, died, covariate presence\nCategories: age bands, follow-up status, disease groups (e.g. CKD stages)"
+  },
+  {
+    "objectID": "ehrworkshop.html#your-turn-2",
+    "href": "ehrworkshop.html#your-turn-2",
+    "title": "Analysis of EHR Workshop",
+    "section": "Your turn",
+    "text": "Your turn\n\nOpen the your-turn-mutate.R file\nWork through the exercises in order"
+  },
+  {
+    "objectID": "ehrworkshop.html#group-operations",
+    "href": "ehrworkshop.html#group-operations",
+    "title": "Analysis of EHR Workshop",
+    "section": "Group operations",
+    "text": "Group operations\n\nHealth record datasets have one row per event - e.g. a consultation, a symptom, a prescription\nMutate works well at event level as it works on a per-row basis\nGrouping is how we go from event-level to patient-level – which is typically the unit of analysis we are interested in\n\ne.g. count prescriptions per patient, find an event of interest for a given patient"
+  },
+  {
+    "objectID": "ehrworkshop.html#how-to-use-group-by",
+    "href": "ehrworkshop.html#how-to-use-group-by",
+    "title": "Analysis of EHR Workshop",
+    "section": "How to use group by",
+    "text": "How to use group by\ndrugissue |&gt;\n    group_by(prodcodeid) |&gt;\n    summarise(n_issues = n(), .groups = \"drop\")\n\nsummarise() collapses each group to one row; n() counts rows in the group\nMultiple grouping variables: group_by(patid, prodcodeid)\ngroup_by() |&gt; mutate() instead of summarise() — adds a per-group value but keeps every row"
+  },
+  {
+    "objectID": "ehrworkshop.html#what-we-typically-group-by",
+    "href": "ehrworkshop.html#what-we-typically-group-by",
+    "title": "Analysis of EHR Workshop",
+    "section": "What we typically group by",
+    "text": "What we typically group by\n\npatid: the most common grouping, since the unit of analysis is usually the patient\nmedcodeid/prodcodeid: code-level summaries, e.g. how many patients on a given drug\nCombinations, e.g. patid + prodcodeid\npracid, gender, other sociodemographic variables (typical Table 1 summaries)"
+  },
+  {
+    "objectID": "ehrworkshop.html#your-turn-3",
+    "href": "ehrworkshop.html#your-turn-3",
+    "title": "Analysis of EHR Workshop",
+    "section": "Your turn",
+    "text": "Your turn\n\nOpen the your-turn-groupby.R file\nWork through the exercises in order"
+  },
+  {
+    "objectID": "ehrworkshop.html#joinmerge",
+    "href": "ehrworkshop.html#joinmerge",
+    "title": "Analysis of EHR Workshop",
+    "section": "Join/merge",
+    "text": "Join/merge\n\nSo far all operations worked on a single table\nAnalysing data is almost impossible without combining different tables\nA join works on two tables instead of one\nIn R, we’ll find both merge and join as the names for these operations\nJoining is what make EMIS work to display or record data"
+  },
+  {
+    "objectID": "ehrworkshop.html#how-a-simple-join-works",
+    "href": "ehrworkshop.html#how-a-simple-join-works",
+    "title": "Analysis of EHR Workshop",
+    "section": "How a simple join works",
+    "text": "How a simple join works\n\nJoin uses the values of one or more columns from one table to look for one or more rows in a second table\nExample:\n\nIn the patient table, the pracid column indicates the practice that the patient is registered with\nIn the practice table, in addition to pracid, we have the region where the practice is located\nTo add region information to the patient table, we can join the patient table with the practice table using pracid to recover the regions"
+  },
+  {
+    "objectID": "ehrworkshop.html#types-of-join-operations",
+    "href": "ehrworkshop.html#types-of-join-operations",
+    "title": "Analysis of EHR Workshop",
+    "section": "Types of join operations",
+    "text": "Types of join operations\n\nInner join: in each table keeps the rows that have a match in the other one.\n\nIf a patient is registered with a practice that is not in the practice table, that patient is not included in the joined table\nA practice without patients will also be dropped\n\nLeft/right join: keeps rows that do not have a match, fill the columns of the other table with NA (missing value in R)\n\nIf a patient is registered with a practice that is not in the practice table, the region for the missing practice is filled with NA\nA practice without patients is combined with a missing patient, i.e. a patient without NA in every column\n\nFull join: keeps all rows that could be missing from either table, filling the columns with NA depending on which table is missing\nInequality joins: apply both an exact match and a filter operation at the same time, e.g. compare the date of all consultations with a patient’s registration date"
+  },
+  {
+    "objectID": "ehrworkshop.html#how-to-use-joins",
+    "href": "ehrworkshop.html#how-to-use-joins",
+    "title": "Analysis of EHR Workshop",
+    "section": "How to use joins",
+    "text": "How to use joins\n\nFilter to a concept via codelist:\n\ndrugissue |&gt;\n    inner_join(ras_codelist, by = \"prodcodeid\")\n\nBring in columns even when unmatched:\n\npatient |&gt;\n    left_join(drugissue, by = \"patid\")\n\nMatch on a range, not an exact value:\n\nobservation |&gt;\n    inner_join(patient,\n               by = join_by(patid == patid, obsdate &gt; regstartdate))"
+  },
+  {
+    "objectID": "ehrworkshop.html#tables-we-typically-join",
+    "href": "ehrworkshop.html#tables-we-typically-join",
+    "title": "Analysis of EHR Workshop",
+    "section": "Tables we typically join",
+    "text": "Tables we typically join\n\nobservation/drugissue + a codelist: restrict to a specific condition or drug\npatient + an aggregated table (e.g. prescription counts per patient)\nInequality join: restrict events to a date window relative to another table, e.g. only prescriptions issued after registration\nanti_join(): exclude only the matching rows (i.e. opposite of inner join)"
+  },
+  {
+    "objectID": "ehrworkshop.html#your-turn-4",
+    "href": "ehrworkshop.html#your-turn-4",
+    "title": "Analysis of EHR Workshop",
+    "section": "Your turn",
+    "text": "Your turn\n\nOpen the your-turn-joins.R file\nWork through the exercises in order"
+  },
+  {
+    "objectID": "ehrworkshop.html#combining-everything",
+    "href": "ehrworkshop.html#combining-everything",
+    "title": "Analysis of EHR Workshop",
+    "section": "Combining everything",
+    "text": "Combining everything\n\nWe have prepared three case studies:\n\nOsteoarthritis and BMI descriptive analysis\nAntidepressant prescription reviews check\nAntihypertensive treatment intensification analysis\n\nNote: CPRD Aurum synthetic data is considered a medium fidelity dataset, which means that we will not necessarily find the patterns we are looking for\nIt still works for this workshop because the structure is exactly the same as the real dataset"
+  },
+  {
+    "objectID": "ehrworkshop.html#osteoarthritis-and-bmi",
+    "href": "ehrworkshop.html#osteoarthritis-and-bmi",
+    "title": "Analysis of EHR Workshop",
+    "section": "Osteoarthritis and BMI",
+    "text": "Osteoarthritis and BMI\n\nNICE guideline NG226 indicates that weight management is a treatment for OA\nWe can investigate a couple of questions using CPRD:\n\nIs BMI recorded around the OA diagnosis, and does the recording rate vary by groups (age, region)?\nAmong those with a BMI recorded, does the measurement vary by group?\n\nOur study:\n\nStudy period: 2022-2025\nPopulation: patients diagnosed with OA in the study period\nVariable of interest: BMI at/near diagnosis (+/- 90 days)\nComparison variables: age band, sex and region\n\nAim: data ready for a comparison across groups w/ statistical tests"
+  },
+  {
+    "objectID": "ehrworkshop.html#what-we-need-to-do",
+    "href": "ehrworkshop.html#what-we-need-to-do",
+    "title": "Analysis of EHR Workshop",
+    "section": "What we need to do",
+    "text": "What we need to do\n\nIdentify patients with an osteoarthritis diagnosis (filter)\nFind BMI measurements around the diagnosis date (filter + join)\nSelect the closest BMI value to diagnosis (group by + summarise)\nFlag patients with no BMI recorded (join)\nCategorise BMI per NICE thresholds (mutate)"
+  },
+  {
+    "objectID": "ehrworkshop.html#antidepressant-prescription-reviews",
+    "href": "ehrworkshop.html#antidepressant-prescription-reviews",
+    "title": "Analysis of EHR Workshop",
+    "section": "Antidepressant prescription reviews",
+    "text": "Antidepressant prescription reviews\n\nNICE guideline NG222: are patients getting the follow-up review?\n\n\n\nOur study:\n\nStudy period: 2022-2025\nInclusion:\n\nDepression diagnosis – any time\nAntidepressant prescription (after depression diagnosis)\nAged 18+ when prescribed\n\nExclusion:\n\nNo antidepressant prescription in the past 12 months (washout)\n\nExposure: incident antidepressant prescription\nOutcome: consultation within 1/2 weeks (age-dependent)\n\nAim: data ready to check the proportion of patients meeting the review target overall and stratified by age group, drug class and year of prescription"
+  },
+  {
+    "objectID": "ehrworkshop.html#what-we-need-to-do-1",
+    "href": "ehrworkshop.html#what-we-need-to-do-1",
+    "title": "Analysis of EHR Workshop",
+    "section": "What we need to do",
+    "text": "What we need to do\n\nIdentify patients with depression diagnosis (filter)\nFind prescriptions post-2022 and post-depression diagnosis (not same day) (filter + join)\nFind prescriptions without a preceding prescription in the past 12 months\nFind the date of the first consultation after the prescription\nFor patients aged 18-25: flag if the consultation happened within 1 week\nFor patients aged 26+: flag if the consultation happened within 2 weeks\nFlag patients without consultations"
+  },
+  {
+    "objectID": "ehrworkshop.html#antihypertensive-escalation",
+    "href": "ehrworkshop.html#antihypertensive-escalation",
+    "title": "Analysis of EHR Workshop",
+    "section": "Antihypertensive escalation",
+    "text": "Antihypertensive escalation\n\nNICE guideline NG136: intensification steps\n\nACEi or ARB -&gt; CCB or thiazide -&gt; CCB + thiazide\nDifferent paths for age, ethnicity and T2D\n\nWe will characterise the intensification post-diagnosis\n\nTo keep it simple we will focus only on incident cases + prescriptions\n\nOur study:\n\nStudy period: 2019-2025\nInclusion:\n\nPatients with new hypertension diagnosis, aged 18+ at diagnosis\nPatients starting one of the 3 possible antihypertensive classes\n\nExposure: first-line drug class\nOutcome: whether a second, different drug class was added within 12 months of starting treatment, and time to that escalation\n\nAim: data ready to describe escalation patterns, such as proportion of patients escalating within 12 months, and the distribution of time to escalation"
+  },
+  {
+    "objectID": "ehrworkshop.html#what-we-need-to-do-2",
+    "href": "ehrworkshop.html#what-we-need-to-do-2",
+    "title": "Analysis of EHR Workshop",
+    "section": "What we need to do",
+    "text": "What we need to do\n\nIdentify patients with a hypertension diagnosis, aged 18+ (filter)\nClassify each prescription into a drug class, restricted to the cohort (join + filter)\nFind each patient’s first prescription date and drug class (group by + summarise/slice)\nFind the first prescription of a different class, if any, and whether it fell within 12 months (filter + join)\nAssemble one row per patient with start date, first class, and escalation outcome (join + mutate)"
+  },
+  {
+    "objectID": "ehrworkshop.html#wrap-up",
+    "href": "ehrworkshop.html#wrap-up",
+    "title": "Analysis of EHR Workshop",
+    "section": "Wrap-up",
+    "text": "Wrap-up\n\nWe learned how information is structured in CPRD\n\nNo datasets are the same but they often follow similar patterns\n\nWe learned what we want our data to look like for analysis\nWe learned five data processing operations that allow us to prepare data for analysis\nMore information:\n\nR for Data Science (data-oriented): https://r4ds.hadley.nz/\nR cookbook (programming-oriented): https://rc2e.com/"
+  }
+]
