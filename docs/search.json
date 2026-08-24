@@ -67,7 +67,7 @@
     "href": "ehrworkshop.html#key-data-operations",
     "title": "Analysis of EHR Workshop",
     "section": "Key data operations",
-    "text": "Key data operations\n\nFive key commands:\n\nFilter: keep/exclude rows from tables\nSelect: keep/exclude columns from tables\nMutate: create new columns or change the content of existing columns\nGroup By: apply filter/mutate on a subset of rows (e.g. )\nJoin/Merge: combine different tables into one\n\nNot an exhaustive list but covers most of what we need to prepare a dataset for analysis"
+    "text": "Key data operations\n\nFive key commands:\n\nFilter: keep/exclude rows from tables\nSelect: keep/exclude columns from tables\nMutate: create new columns or change the content of existing columns\nGroup By: apply filter/mutate on a subset of rows\nJoin/Merge: combine different tables into one\n\nNot an exhaustive list but covers most of what we need to prepare a dataset for analysis"
   },
   {
     "objectID": "ehrworkshop.html#filter",
@@ -81,7 +81,7 @@
     "href": "ehrworkshop.html#how-to-use-filter",
     "title": "Analysis of EHR Workshop",
     "section": "How to use filter",
-    "text": "How to use filter\n\nDirect value:\n\npatient |&gt;\n    filter(gender == \"M\")\n\nReferencing another variable:\n\nstudy_start &lt;- as.Date(\"2005-01-01\")\npatient |&gt;\n    filter(regstatdate &gt;= study_start)\n\nReferencing another variable which is a list\n\nsuspect_practices &lt;- c(2, 3, 5, 9)\npatient |&gt;\n    filter(pracid %in% suspect_practices)\n\nCombine conditions with ,/& (AND), | (OR), ! (NOT)"
+    "text": "How to use filter\n\nDirect value:\n\npatient |&gt;\n    filter(gender == \"M\")\n\nReferencing another variable:\n\nstudy_start &lt;- as.Date(\"2005-01-01\")\npatient |&gt;\n    filter(regstartdate &gt;= study_start)\n\nReferencing another variable which is a list\n\nsuspect_practices &lt;- c(2, 3, 5, 9)\npatient |&gt;\n    filter(pracid %in% suspect_practices)\n\nCombine conditions with ,/& (AND), | (OR), ! (NOT)"
   },
   {
     "objectID": "ehrworkshop.html#what-we-filter-on",
