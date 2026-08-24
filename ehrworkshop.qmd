@@ -167,7 +167,7 @@ gt::gt(
     - **Filter**: keep/exclude rows from tables
     - **Select**: keep/exclude columns from tables
     - **Mutate**: create new columns or change the content of existing columns
-    - **Group By**: apply filter/mutate on a subset of rows (e.g. )
+    - **Group By**: apply filter/mutate on a subset of rows
     - **Join/Merge**: combine different tables into one
 - Not an exhaustive list but covers most of what we need to prepare a dataset for analysis
 
@@ -196,7 +196,7 @@ patient |>
 ```r
 study_start <- as.Date("2005-01-01")
 patient |>
-    filter(regstatdate >= study_start)
+    filter(regstartdate >= study_start)
 ```
 
 - Referencing another variable which is a list
