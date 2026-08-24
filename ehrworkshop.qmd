@@ -408,7 +408,7 @@ observation |>
 # Break
 
 - After the break:
-    - Applying these concepts to two research questions
+    - Applying these concepts to three research questions
     - Codelists have been provided
     - Preliminary code has been provided
 
